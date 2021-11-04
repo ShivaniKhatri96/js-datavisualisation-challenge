@@ -1,3 +1,4 @@
+//chart1
 const table = document.getElementById("table1");
 const years = [];
 const countries = [];
@@ -108,10 +109,6 @@ for (let i = 1; i < table2.rows.length; i++) {
   prisonPopn2.push(table2.rows[i].cells[3].innerHTML);
 }
 console.log(JSON.stringify(prisonPopn2));
-//creating an object
-// let dataset1 = Object.assign(prisonPopn.map(x => ({data: x})))
-// console.log(JSON.stringify(prisondataObj));
-
 //for chart.js
 
 // const div = document.getElementById("mw-content-text");
@@ -145,6 +142,14 @@ const myChart2 = new Chart(ctx2, {
   }
 })
 
+// const firstDiv = document.getElementById("content");
+// const desiredPosition = document.getElementById("bodyContent");
+// // const firstCanvas = document.createElement("canvas");
+// // firstDiv.insertBefore(firstCanvas, div);
+// const p = document.createElement("p");
+
+// firstDiv.insertBefore(p, desiredPosition);
+// p.innerHTML = shivani;
 //------------------------------------------
 //old code (done manually)
 // (() => {
