@@ -96,7 +96,7 @@ for (let i = 1; i < table2.rows.length; i++) {
   //both works. first is simpler
   let trimmed = replace.trim();
   allCountries.push(trimmed);
-    //allCountries.push(oneCountry);
+  //allCountries.push(oneCountry);
 }
 console.log(JSON.stringify(allCountries));
 
@@ -141,15 +141,90 @@ const myChart2 = new Chart(ctx2, {
     responsive: true,
   }
 })
+//chart 3
 
-// const firstDiv = document.getElementById("content");
-// const desiredPosition = document.getElementById("bodyContent");
-// // const firstCanvas = document.createElement("canvas");
-// // firstDiv.insertBefore(firstCanvas, div);
-// const p = document.createElement("p");
 
-// firstDiv.insertBefore(p, desiredPosition);
-// p.innerHTML = shivani;
+
+//handling the request
+let data3;
+let data3Array;
+let dataX = [];
+let dataY = [];
+function updateChart3() {
+  //initialing the request
+  let xhr = new XMLHttpRequest()
+  //xhr.open("GET", "https://canvasjs.com/services/data/datapoints.php", true)
+  xhr.open("GET", "https://canvasjs.com/services/data/datapoints.php?xstart=" + (dataX.length + 1) + "&ystart=" + (dataX.length - 1) + "&length=1&type=json", true)
+  //true = asynchronous
+
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      // dataPoints.push({x: value[0],y: parseInt(value[1])});
+      data3 = this.response;
+      //Converting a string to JSON object
+      data3Array = JSON.parse(data3);
+      console.log(data3);
+      console.log(data3Array);
+
+      for (let dta of data3Array) {
+        dataX.push(dta[0]);
+        //dataX.push(parseInt(dta[0]));
+      }
+      console.log(dataX);
+      for (let dta of data3Array) {
+        dataY.push(dta[1]);
+        //dataY.push(parseInt(dta[1]));
+      }
+      console.log(dataY);
+      //calling the chart function
+      everything3();
+    }
+    setTimeout(updateChart3, 1000);
+  }
+
+  //sending the request
+  xhr.send();
+}
+updateChart3();
+
+//creating a chart
+function everything3() {
+  if (document.getElementById("canvasthree") != null) {
+    document.getElementById("canvasthree").remove()
+  }
+  const firstDiv = document.getElementById("content");
+  const desiredPosition = document.getElementById("bodyContent");
+  const firstCanvas = document.createElement("canvas");
+  firstCanvas.setAttribute("id","canvasthree");
+  firstDiv.insertBefore(firstCanvas, desiredPosition);
+
+  //just checking if I have created canvas in right location
+  //using p
+  // const p = document.createElement("p");
+  // firstDiv.insertBefore(p, desiredPosition);
+  // p.innerHTML = "hello";
+  const ctx3 = firstCanvas.getContext("2d");
+  const myChart3 = new Chart(ctx3, {
+    type: "line",
+    data: {
+      labels: dataX,
+      datasets: [
+        {
+          label: "Live updating Chart",
+          data: dataY,
+          backgroundColor: "#A0D9D9",
+          borderColor: "#45858C",
+          fill: true,
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+    }
+  })
+}
+
+
 //------------------------------------------
 //old code (done manually)
 // (() => {
