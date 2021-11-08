@@ -195,11 +195,13 @@ function everything3() {
   const firstDiv = document.getElementById("content");
   const desiredPosition = document.getElementById("bodyContent");
   const firstCanvas = document.createElement("canvas");
-  firstCanvas.setAttribute("id","canvasthree");
+  firstCanvas.setAttribute("id", "canvasthree");
   firstDiv.insertBefore(firstCanvas, desiredPosition);
 
   //just checking if I have created canvas in right location
   //using p
+  // const firstDiv = document.getElementById("content");
+  // const desiredPosition = document.getElementById("bodyContent");
   // const p = document.createElement("p");
   // firstDiv.insertBefore(p, desiredPosition);
   // p.innerHTML = "hello";
@@ -223,7 +225,7 @@ function everything3() {
     }
   })
 }
-
+everything3()
 
 //------------------------------------------
 //old code (done manually)
